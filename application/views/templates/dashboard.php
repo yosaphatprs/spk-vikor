@@ -36,10 +36,10 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-info sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex text-light align-items-center bg-info mary justify-content-center">
+            <a class="sidebar-brand d-flex text-light align-items-center bg-primary mary justify-content-center">
                 <div class="sidebar-brand-icon"><img src="<?= base_url() ?>assets/img/logo_polinema.png ?>"
                         class="rounded-circle" style="width:65px;" alt=""></div>
                 <div class="sidebar-brand-text mx-3 small text-start"><b>Politeknik Negeri Malang</b></div>
@@ -145,11 +145,11 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-dark bg-info topbar mb-4 static-top shadow-sm">
+                <nav class="navbar navbar-expand navbar-dark bg-primary topbar mb-4 static-top shadow-sm">
                     <!-- Sidebar Toggler (Sidebar) -->
                     <div class="text-center d-none d-md-inline">
-                        <a href="#" class="btn btn-info border-0" data-toggle="tooltip" title="Tutup Sidebar"
-                            id="sidebarToggle"><i class="fas fa-fw fa-server"></i></a>
+                        <a href="#" class="btn btn-light border-0" data-toggle="tooltip" title="Tutup Sidebar"
+                            id="sidebarToggle"><i class="fas fa-fw fa-server text-primary"></i></a>
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link bg-transparent d-md-none rounded-circle mr-3">
@@ -167,8 +167,6 @@
                                     <?= userdata('nama'); ?>
                                     <br>
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="<?= base_url() ?>assets/img/avatar/user.png ?>"><br>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

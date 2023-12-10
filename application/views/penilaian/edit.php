@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-lg mb-4 border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-lg mb-4 border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col-auto">
                         <a href="<?= base_url('penilaian') ?>" class="btn btn-sm btn-secondary btn-icon-split">
@@ -47,7 +47,8 @@
                         <div class="row form-group">
                             <div class="col">
                                 <input class="form-control" type="text" id="nilaikriteria<?php echo $kodekriteria; ?>"
-                                    name="nilaikriteria<?php echo $kodekriteria; ?>">
+                                    name="nilaikriteria<?php echo $kodekriteria; ?>"
+                                    value="<?php echo $penilaian[$indexKdKriteria]['nilai']; $indexKdKriteria+=1 ?>">
                             </div>
                         </div>
                     </div>

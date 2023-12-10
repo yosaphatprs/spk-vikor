@@ -1,4 +1,5 @@
 <?php
+$tipeKriteria = array();
 $maxKriteria = array();
 $nilaiMaxKriteria = array();
 $nilaiMinKriteria = array();
@@ -23,8 +24,8 @@ $hasilSPK = array();
 </div>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -41,7 +42,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                            <th><?php echo $datakriteria['nama_kriteria'] ?></th>
+                            <th><?php echo $datakriteria['id_kriteria'] ?></th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -67,12 +68,35 @@ $hasilSPK = array();
                         </tr>
                         <?php } ?>
                         <tr>
+                            <td colspan="3" align="center"><b>Tipe</b></td>
+                            <?php
+                            foreach ($kriteria as $datakriteria) {
+                                if($datakriteria['tipe'] == "b"){
+                                    $tipeKriteria[$datakriteria['id_kriteria']] = "Benefit";
+                                    echo "<td>" . $tipeKriteria[$datakriteria['id_kriteria']] . "</td>";
+                                }else if($datakriteria['tipe'] == "c"){
+                                    $tipeKriteria[$datakriteria['id_kriteria']] = "Cost";
+                                    echo "<td>" . $tipeKriteria[$datakriteria['id_kriteria']] . "</td>";
+                                }
+                            }
+                            ?>
+                        </tr>
+                        <tr>
                             <td colspan="3" align="center"><b>MAX</b></td>
                             <?php
                             foreach ($kriteria as $datakriteria) {
-                                rsort($maxKriteria[$datakriteria['id_kriteria']]);
-                                echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
-                                $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                if($tipeKriteria[$datakriteria['id_kriteria']] == "Benefit"){
+                                    rsort($maxKriteria[$datakriteria['id_kriteria']]);
+                                    echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                    $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                }else if($tipeKriteria[$datakriteria['id_kriteria']] == "Cost"){   
+                                    sort($maxKriteria[$datakriteria['id_kriteria']]);
+                                    echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                    $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                }
+                                // rsort($maxKriteria[$datakriteria['id_kriteria']]);
+                                // echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                // $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
                             }
 
                             ?>
@@ -81,9 +105,18 @@ $hasilSPK = array();
                             <td colspan="3" align="center"><b>MIN</b></td>
                             <?php
                             foreach ($kriteria as $datakriteria) {
-                                sort($maxKriteria[$datakriteria['id_kriteria']]);
-                                echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
-                                $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                if($tipeKriteria[$datakriteria['id_kriteria']] == "Benefit"){
+                                    sort($maxKriteria[$datakriteria['id_kriteria']]);
+                                    echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                    $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                }else if($tipeKriteria[$datakriteria['id_kriteria']] == "Cost"){
+                                    rsort($maxKriteria[$datakriteria['id_kriteria']]);
+                                    echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                    $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+                                }
+                                // sort($maxKriteria[$datakriteria['id_kriteria']]);
+                                // echo "<td>" . $maxKriteria[$datakriteria['id_kriteria']][0] . "</td>";
+                                // $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
                             }
 
                             ?>
@@ -99,8 +132,8 @@ $hasilSPK = array();
 
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -136,11 +169,11 @@ $hasilSPK = array();
                                         echo $nilaiMaxKriteria[$indexKriteria] . " - ";
                                         echo $nilaiMinKriteria[$indexKriteria] . ") = ";
 
-                                        $hasil[] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 2);
-                                        echo round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 2);
+                                        $hasil[] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 3);
+                                        echo round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 3);
                                         $indexNilai += 1;
                                         echo "<br>";
-                                        $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']][$datakriteria['id_kriteria']] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 2);
+                                        $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']][$datakriteria['id_kriteria']] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 3);
                                         $indexKriteria += 1;
                                     }
                                     $no++;
@@ -159,8 +192,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -177,7 +210,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th><?php echo $datakriteria['id_kriteria']?></th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -212,8 +245,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -230,7 +263,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th><?php echo $datakriteria['id_kriteria']?></th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -281,8 +314,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -299,7 +332,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th><?php echo $datakriteria['id_kriteria']?></th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -338,8 +371,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col-6">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-light text-center">
@@ -368,7 +401,7 @@ $hasilSPK = array();
                                                 echo " +";
                                             }
                                             //$tempHasil = $idealPositif[$datakriteria['id_kriteria']] - $nilaiAlternatif[$datakriteria['id_kriteria']];
-                                            //$hasil[] = pow($tempHasil, 2);
+                                            //$hasil[] = pow($tempHasil, 3);
                                             $nomorSum++;
                                             //echo $tempBobot . ";";
                                             $tempHasil += $nilaiAlternatif[$datakriteria['id_kriteria']];
@@ -386,8 +419,8 @@ $hasilSPK = array();
         </div>
     </div>
     <div class="col-6">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-light text-center">
@@ -438,8 +471,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -455,7 +488,7 @@ $hasilSPK = array();
                             <th>No. </th>
                             <th class="text-center">NUPTK</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th><?php echo $datakriteria['id_kriteria']?></th>
                             <?php } ?>
                             <th>S<sub>i</sub></th>
                             <th>R<sub>i</sub></th>
@@ -521,8 +554,8 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
@@ -583,12 +616,12 @@ $hasilSPK = array();
 <br>
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-sm border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
-                            Perhitungan Indeks Vikor
+                            Perhitungan Indeks Vikor (Q)
                         </h4>
                     </div>
                 </div>
@@ -617,15 +650,26 @@ $hasilSPK = array();
                             <td><?= $matrikskeputusan['nama']; ?></td>
                             <td>
                                 <?php
-                                    echo "= ((" . $hasilS[$matrikskeputusan['cu_alternatif']] . " - " . $maxS . ") / (" . $minS . "-" . $maxS . ")0.5) + ((1-0.5)(" . $hasilR[$matrikskeputusan['cu_alternatif']] . " - ".$maxR.") / (".$minR."-".$maxR."))";
+                                    echo "= (0.5 ((" . $hasilS[$matrikskeputusan['cu_alternatif']] . " - " . $minS . ") / (" . $maxS . " - " . $minS . ")) + ((1 - 0.5) (" . $hasilR[$matrikskeputusan['cu_alternatif']] . " - " . $minR . ") / (" . $maxR . " - " . $minR . "))";
                                     echo "<br>";
-                                    $hasil1 =round((0.5*(($hasilS[$matrikskeputusan['cu_alternatif']]-$maxS)/($minS-$maxS))),2);
+                                    $hasil1 = round((0.5*(($hasilS[$matrikskeputusan['cu_alternatif']]-$minS)/($maxS-$minS))),3);
                                     echo "= " . $hasil1;
                                     echo " + ";
-                                    $hasil2 =round(((1-0.5)*($hasilR[$matrikskeputusan['cu_alternatif']]-$maxR)/($minR-$maxR)),2);
+                                    $hasil2 =round(((1-0.5)*($hasilR[$matrikskeputusan['cu_alternatif']]-$minR)/($maxR-$minR)),3);
                                     echo $hasil2;
                                     echo "<br>";
                                     $hasilAkhir = $hasil1+$hasil2;
+                                    ?>
+                                <?php
+                                    // echo "= ((" . $hasilS[$matrikskeputusan['cu_alternatif']] . " - " . $maxS . ") / (" . $minS . "-" . $maxS . ")0.5) + ((1-0.5)(" . $hasilR[$matrikskeputusan['cu_alternatif']] . " - ".$maxR.") / (".$minR."-".$maxR."))";
+                                    // echo "<br>";
+                                    // $hasil1 =round((0.5*(($hasilS[$matrikskeputusan['cu_alternatif']]-$maxS)/($minS-$maxS))),3);
+                                    // echo "= " . $hasil1;
+                                    // echo " + ";
+                                    // $hasil2 =round(((1-0.5)*($hasilR[$matrikskeputusan['cu_alternatif']]-$maxR)/($minR-$maxR)),3);
+                                    // echo $hasil2;
+                                    // echo "<br>";
+                                    // $hasilAkhir = $hasil1+$hasil2;
                                     ?>
                             </td>
                             <td>

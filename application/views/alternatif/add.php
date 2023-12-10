@@ -1,29 +1,30 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-lg mb-4 border-bottom-info">
-            <div class="card-header bg-info py-3">
-              <div class="row">
-                <div class="col-auto">
-                    <a href="<?= base_url('dataalternatif') ?>" class="btn btn-sm btn-secondary btn-icon-split">
-                      <span class="icon" data-toggle="tooltip" title="Kembali">
-                        <i class="fa fa-arrow-left"></i>
-                      </span>
-                    </a>
-                </div>
-                <div class="col">
-                    <h4 class="h5 align-middle m-0 font-weight-bold text-light text-center">
-                        Form <?= $title; ?>
-                    </h4>
+        <div class="card shadow-lg mb-4 border-bottom-primary">
+            <div class="card-header bg-primary py-3">
+                <div class="row">
+                    <div class="col-auto">
+                        <a href="<?= base_url('dataalternatif') ?>" class="btn btn-sm btn-secondary btn-icon-split">
+                            <span class="icon" data-toggle="tooltip" title="Kembali">
+                                <i class="fa fa-arrow-left"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <h4 class="h5 align-middle m-0 font-weight-bold text-light text-center">
+                            Form <?= $title; ?>
+                        </h4>
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="card-body pb-2">
                 <?= $this->session->flashdata('pesan'); ?>
                 <?= form_open(); ?>
                 <div class="row form-group">
                     <label class="col-md-4 text-md-right" for="cu_alternatif">Nomor Induk Pegawai</label>
                     <div class="col-md-6">
-                        <input type="text" id="cu_alternatif" name="cu_alternatif" class="form-control" placeholder="Nomor Induk Pegawai">
+                        <input type="text" id="cu_alternatif" name="cu_alternatif" class="form-control"
+                            placeholder="Nomor Induk Pegawai">
                         <?= form_error('cu_alternatif', '<span class="text-danger small">', '</span>'); ?>
                     </div>
                 </div>
@@ -48,7 +49,8 @@
                 <div class="row form-group">
                     <label class="col-md-4 text-md-right" for="tempat_lahir">Tempat Lahir</label>
                     <div class="col-md-6">
-                        <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control" placeholder="Tempat Lahir">
+                        <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control"
+                            placeholder="Tempat Lahir">
                         <?= form_error('tempat_lahir', '<span class="text-danger small">', '</span>'); ?>
                     </div>
                 </div>
@@ -56,7 +58,8 @@
                 <div class="row form-group">
                     <label class="col-md-4 text-md-right" for="tanggal_lahir">Tanggal Lahir</label>
                     <div class="col-md-6">
-                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control" placeholder="Tanggal Lahir">
+                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control"
+                            placeholder="Tanggal Lahir">
                         <?= form_error('tanggal_lahir', '<span class="text-danger small">', '</span>'); ?>
                     </div>
                 </div>
@@ -76,7 +79,8 @@
                 <div class="row form-group">
                     <label class="col-md-4 text-md-right" for="pengalaman">Pengalaman</label>
                     <div class="col-md-6">
-                        <input type="number" step="0.1" id="pengalaman" name="pengalaman" class="form-control" placeholder="Lama Pengalaman Kerja">
+                        <input type="number" step="0.1" id="pengalaman" name="pengalaman" class="form-control"
+                            placeholder="Lama Pengalaman Kerja">
                         <?= form_error('pengalaman', '<span class="text-danger small">', '</span>'); ?>
                     </div>
                     Tahun

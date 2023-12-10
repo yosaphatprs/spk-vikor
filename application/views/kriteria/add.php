@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <div class="card shadow-lg mb-4 border-bottom-info">
-            <div class="card-header bg-info py-3">
+        <div class="card shadow-lg mb-4 border-bottom-primary">
+            <div class="card-header bg-primary py-3">
                 <div class="row">
                     <div class="col-auto">
                         <a href="<?= base_url('datakriteria') ?>" class="btn btn-sm btn-secondary btn-icon-split">

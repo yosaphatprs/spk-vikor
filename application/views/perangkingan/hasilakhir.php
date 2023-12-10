@@ -4,6 +4,7 @@
     </div>
 </div>
 <?php
+$tipeKriteria = array();
 $maxKriteria = array();
 $nilaiMaxKriteria = array();
 $nilaiMinKriteria = array();
@@ -29,12 +30,29 @@ foreach ($matriks_keputusan as $matrikskeputusan) {
     }
 }
 foreach ($kriteria as $datakriteria) {
-    rsort($maxKriteria[$datakriteria['id_kriteria']]);
-    $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    if($datakriteria['tipe'] == "b"){
+        $tipeKriteria[$datakriteria['id_kriteria']] = "Benefit";
+    }else if($datakriteria['tipe'] == "c"){
+        $tipeKriteria[$datakriteria['id_kriteria']] = "Cost";
+    }
 }
 foreach ($kriteria as $datakriteria) {
-    sort($maxKriteria[$datakriteria['id_kriteria']]);
-    $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    if($tipeKriteria[$datakriteria['id_kriteria']] == "Benefit"){
+        rsort($maxKriteria[$datakriteria['id_kriteria']]);
+        $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    }else if($tipeKriteria[$datakriteria['id_kriteria']] == "Cost"){   
+        sort($maxKriteria[$datakriteria['id_kriteria']]);
+        $nilaiMaxKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    }
+}
+foreach ($kriteria as $datakriteria) {
+    if($tipeKriteria[$datakriteria['id_kriteria']] == "Benefit"){
+        sort($maxKriteria[$datakriteria['id_kriteria']]);
+        $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    }else if($tipeKriteria[$datakriteria['id_kriteria']] == "Cost"){
+        rsort($maxKriteria[$datakriteria['id_kriteria']]);
+        $nilaiMinKriteria[] = $maxKriteria[$datakriteria['id_kriteria']][0];
+    }
 }
 $no = 1;
 $indexNilai = 0;
@@ -45,9 +63,9 @@ foreach ($matriks_keputusan as $nilaiAlternatif) {
     $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']]['cu_alternatif'] = $nilaiAlternatif['cu_alternatif'];
     $indexKriteria = 0;
     foreach ($kriteria as $datakriteria) {
-        $hasil[] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 2);
+        $hasil[] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 3);
         $indexNilai += 1;
-        $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']][$datakriteria['id_kriteria']] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 2);
+        $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']][$datakriteria['id_kriteria']] = round(($nilaiMaxKriteria[$indexKriteria] - $nilaiAlternatif[$datakriteria['id_kriteria']]) / ($nilaiMaxKriteria[$indexKriteria] - $nilaiMinKriteria[$indexKriteria]), 3);
         $indexKriteria += 1;
     }
     $no++;
@@ -107,8 +125,8 @@ foreach ($matriksTernormalisasiY as $data) {
 $this->db->empty_table('hasilspk');
 foreach ($matriks_keputusan as $matrikskeputusan) {
 
-    $hasil1 = round((0.5 * (($hasilS[$matrikskeputusan['cu_alternatif']] - $maxS) / ($minS - $maxS))), 2);
-    $hasil2 = round(((1 - 0.5) * ($hasilR[$matrikskeputusan['cu_alternatif']] - $maxR) / ($minR - $maxR)), 2);
+    $hasil1 = round((0.5 * (($hasilS[$matrikskeputusan['cu_alternatif']] - $minS) / ($maxS - $minS))), 3);
+    $hasil2 = round(((1 - 0.5) * ($hasilR[$matrikskeputusan['cu_alternatif']] - $minR) / ($maxR - $minR)), 3);
 
     $hasilAkhir = $hasil1 + $hasil2;
 
@@ -128,12 +146,12 @@ foreach ($matriks_keputusan as $matrikskeputusan) {
 
 <div class="row justify-content-center">
     <div class="col">
-        <div class="card shadow-sm border-bottom-info">
+        <div class="card shadow-sm border-bottom-primary">
             <div class="card-header bg-white py-3">
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-dark">
-                            <i class="fas fa-table"></i> Perangkingan Guru Honorer Berprestasi
+                            <i class="fas fa-table"></i> Perangkingan Guru
                         </h4>
                     </div>
                 </div>
@@ -146,28 +164,22 @@ foreach ($matriks_keputusan as $matrikskeputusan) {
                             <th>NIK</th>
                             <th>Nama Guru Honorer
                             <th>Nilai</th>
-                            <th>Hasil</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
+                        <?php
                         $no = 1;
-                        $this->db->order_by('nilai', 'DESC');
+                        $this->db->order_by('nilai', 'ASC');
                         $hasilSPKDatabase = $this->db->get('hasilspk')->result_array();
                         foreach ($hasilSPKDatabase as $hasilPemilihan) {
                         ?>
-                            <tr>
-                                <td><?= $no; ?></td>
-                                <td><?= $hasilPemilihan['cu_alternatif']; ?></td>
-                                <td><?= $hasilPemilihan['nama']; ?></td>
-                                <td><?= $hasilPemilihan['nilai']; ?></td>
-                                <?php if($no < 3){
-                                echo "<td style='background-color:green;color:white;'> Berprestasi</td>";
-                                }else{
-                                    echo '<td>Tidak Lulus </td>';
-                                 } ?>
-                            </tr>
-                            
+                        <tr>
+                            <td><?= $no; ?></td>
+                            <td><?= $hasilPemilihan['cu_alternatif']; ?></td>
+                            <td><?= $hasilPemilihan['nama']; ?></td>
+                            <td><?= $hasilPemilihan['nilai']; ?></td>
+                        </tr>
+
                         <?php $no++;
                         } ?>
                     </tbody>

@@ -18,8 +18,13 @@ class Penilaian extends CI_Controller
         //$this->db->query("UPDATE penilaian SET keterangan = REPLACE(keterangan, '&lt;', '<')");
         //$this->db->query("UPDATE penilaian SET keterangan = REPLACE(keterangan, '&gt;', '>')");
         $data['title'] = "";
-        $this->db->order_by('id_kriteria', 'ASC');
-        $data['kriteria'] = $this->db->get('kriteria')->result_array();
+        $this->db->select('*');
+        $this->db->from('kriteria');
+        $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+        $query = $this->db->get();
+        $data['kriteria'] = $query->result_array();
+        // $this->db->order_by('id_kriteria', 'ASC');
+        // $data['kriteria'] = $this->db->get('kriteria')->result_array();
         $this->db->order_by('cu_alternatif', 'ASC');
         $data['alternatif'] = $this->db->get('alternatif')->result_array();
         $this->template->load('templates/dashboard', 'penilaian/data', $data);
@@ -39,10 +44,13 @@ class Penilaian extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = "Penilaian Guru Berdasarkan Kriteria";
             $data['maxkriteria'] = $this->db->count_all('kriteria');
-            $this->db->order_by('nis', 'ASC');
-            $data['siswa'] = $this->db->get('siswa')->result_array();
-            $this->db->order_by('id_kriteria', 'ASC');
-            $data['kriteria'] = $this->db->get('kriteria')->result_array();
+            // $this->db->order_by('id_kriteria', 'ASC');
+            // $data['kriteria'] = $this->db->get('kriteria')->result_array();
+            $this->db->select('*');
+            $this->db->from('kriteria');
+            $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+            $query = $this->db->get();
+            $data['kriteria'] = $query->result_array();
             $this->template->load('templates/dashboard', 'penilaian/add', $data);
         } else {
             $input = $this->input->post(null, true);
@@ -73,8 +81,13 @@ class Penilaian extends CI_Controller
             $this->db->order_by('id_kriteria', 'ASC');
             $data['penilaian'] = $this->db->query("SELECT * FROM penilaian WHERE cu_alternatif='" . $getId . "' ORDER BY kd_kriteria ASC")->result_array();
             $data['maxkriteria'] = $this->db->count_all('kriteria');
-            $this->db->order_by('id_kriteria', 'ASC');
-            $data['kriteria'] = $this->db->get('kriteria')->result_array();
+            $this->db->select('*');
+            $this->db->from('kriteria');
+            $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+            $query = $this->db->get();
+            $data['kriteria'] = $query->result_array();
+            // $this->db->order_by('id_kriteria', 'ASC');
+            // $data['kriteria'] = $this->db->get('kriteria')->result_array();
             $this->template->load('templates/dashboard', 'penilaian/edit', $data);
         } else {
             $input = $this->input->post(null, true);

@@ -25,7 +25,11 @@ class Metodevikor extends CI_Controller
                 $tempNisNama[$data['cu_alternatif']]['nama'] = $data['nama'];
             }
         }
-        $kriteria = $this->db->get('kriteria')->result_array();
+        $this->db->select('*');
+        $this->db->from('kriteria');
+        $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+        $query = $this->db->get();
+        $kriteria = $query->result_array();
         foreach ($kriteria as $datakriteria) {
             foreach ($parseNama as $data) {
                 $this->db->where('kd_kriteria', $datakriteria['id_kriteria']);
@@ -37,8 +41,13 @@ class Metodevikor extends CI_Controller
         }
         $data['matriks_keputusan'] = $tempNisNama;
         $data['title'] = "";
-        $this->db->order_by('id_kriteria', 'ASC');
-        $data['kriteria'] = $this->db->get('kriteria')->result_array();
+        // $this->db->order_by('id_kriteria', 'ASC');
+        // $data['kriteria'] = $this->db->get('kriteria')->result_array();
+        $this->db->select('*');
+        $this->db->from('kriteria');
+        $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+        $query = $this->db->get();
+        $data['kriteria'] = $query->result_array();
         $this->template->load('templates/dashboard', 'vikor/hasil', $data);
     }
 }

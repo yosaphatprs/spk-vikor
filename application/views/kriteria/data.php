@@ -1,8 +1,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-fw fa-cube"></i> Data Kriteria</h1>
 </div>
-<?= $this->session->flashdata('pesan'); ?>
-<div class="card shadow-sm mb-4 border-bottom-info">
+<div class="card shadow-sm mb-4 border-bottom-primary">
     <div class="card-header bg-white py-3">
         <div class="row">
             <div class="col">
