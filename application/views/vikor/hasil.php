@@ -41,7 +41,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                                <th><?php echo $datakriteria['nama_kriteria'] ?></th>
+                            <th><?php echo $datakriteria['nama_kriteria'] ?></th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -50,21 +50,21 @@ $hasilSPK = array();
                         $no = 1;
                         foreach ($matriks_keputusan as $matrikskeputusan) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $matrikskeputusan['cu_alternatif']; ?></td>
-                                <td><?= $matrikskeputusan['nama']; ?></td>
-                                <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $matrikskeputusan['cu_alternatif']; ?></td>
+                            <td><?= $matrikskeputusan['nama']; ?></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                    <td>
-                                        <?php
+                            <td>
+                                <?php
                                         echo $matrikskeputusan[$datakriteria['id_kriteria']];
                                         $maxKriteria[$datakriteria['id_kriteria']][] = $matrikskeputusan[$datakriteria['id_kriteria']];
                                         ?>
-                                    </td>
-                                <?php } ?>
-                            </tr>
+                            </td>
+                            <?php } ?>
+                        </tr>
                         <?php } ?>
                         <tr>
                             <td colspan="3" align="center"><b>MAX</b></td>
@@ -104,7 +104,8 @@ $hasilSPK = array();
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
-                            Perhitungan Normalisasi Matriks [<i>R<sub>ij</sub> = (X<sub>i</sub> - X<sub>ij</sub>) / (X<sub>j</sub> - X<sub>j</sub>)</i>]
+                            Perhitungan Normalisasi Matriks [<i>R<sub>ij</sub> = (X<sub>i</sub> - X<sub>ij</sub>) /
+                                (X<sub>j</sub> - X<sub>j</sub>)</i>]
                         </h4>
                     </div>
                 </div>
@@ -118,12 +119,12 @@ $hasilSPK = array();
                         foreach ($matriks_keputusan as $nilaiAlternatif) {
                             $hasil = array();
                         ?>
-                            <tr>
-                                <td>
-                                    <b><?= $no . ". [" . $nilaiAlternatif['cu_alternatif'] . "] " . $nilaiAlternatif['nama'] ?></b>
-                                    <br>
+                        <tr>
+                            <td>
+                                <b><?= $no . ". [" . $nilaiAlternatif['cu_alternatif'] . "] " . $nilaiAlternatif['nama'] ?></b>
+                                <br>
 
-                                    <?php
+                                <?php
                                     $nomorKriteria = 1;
                                     $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']]['nama'] = $nilaiAlternatif['nama'];
                                     $hasilTernormalisasiR[$nilaiAlternatif['cu_alternatif']]['cu_alternatif'] = $nilaiAlternatif['cu_alternatif'];
@@ -145,8 +146,8 @@ $hasilSPK = array();
                                     $no++;
                                     $indexNilai = 0;
                                     ?>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -176,7 +177,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                                <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -186,20 +187,20 @@ $hasilSPK = array();
                         //die(print_r($hasilTernormalisasiR));
                         foreach ($hasilTernormalisasiR as $data) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['cu_alternatif']; ?></td>
-                                <td><?= $data['nama']; ?></td>
-                                <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data['cu_alternatif']; ?></td>
+                            <td><?= $data['nama']; ?></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                    <td>
-                                        <?php
+                            <td>
+                                <?php
                                         echo $hasilTernormalisasiR[$data['cu_alternatif']][$datakriteria['id_kriteria']];
                                         ?>
-                                    </td>
-                                <?php } ?>
-                            </tr>
+                            </td>
+                            <?php } ?>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -229,7 +230,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                                <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -239,36 +240,36 @@ $hasilSPK = array();
                         //die(print_r($hasilTernormalisasiR));
                         foreach ($hasilTernormalisasiR as $data) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['cu_alternatif']; ?></td>
-                                <td><?= $data['nama']; ?></td>
-                                <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data['cu_alternatif']; ?></td>
+                            <td><?= $data['nama']; ?></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                    <td>
-                                        <?php
+                            <td>
+                                <?php
                                         echo $hasilTernormalisasiR[$data['cu_alternatif']][$datakriteria['id_kriteria']];
                                         ?>
-                                    </td>
-                                <?php } ?>
-                            </tr>
+                            </td>
                             <?php } ?>
-                            <tr>
-                                <td colspan="8" align="center"><b>X (Dikali)</b></td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" align="center"><b>Bobot</b></td>
-                                <?php
+                        </tr>
+                        <?php } ?>
+                        <tr>
+                            <td colspan="8" align="center"><b>X (Dikali)</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center"><b>Bobot</b></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                <td>
-                                  <?php
+                            <td>
+                                <?php
                                    echo $datakriteria['bobot'];
                                   ?>
-                                </td>
-                                <?php } ?>
-                            </tr>
+                            </td>
+                            <?php } ?>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -298,7 +299,7 @@ $hasilSPK = array();
                             <th>NUPTK</th>
                             <th>Nama</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                                <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -308,23 +309,23 @@ $hasilSPK = array();
                         //die(print_r($hasilTernormalisasiR));
                         foreach ($hasilTernormalisasiR as $data) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['cu_alternatif']; ?></td>
-                                <td><?= $data['nama']; ?></td>
-                                <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data['cu_alternatif']; ?></td>
+                            <td><?= $data['nama']; ?></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                    <td>
-                                        <?php
+                            <td>
+                                <?php
                                         $PembobotanMatriksKeputusanTernormalisasi[$datakriteria['id_kriteria']][] = $hasilTernormalisasiR[$data['cu_alternatif']][$datakriteria['id_kriteria']] * $datakriteria['bobot'];
                                         $matriksTernormalisasiY[$data['cu_alternatif']][$datakriteria['id_kriteria']] = $hasilTernormalisasiR[$data['cu_alternatif']][$datakriteria['id_kriteria']] * $datakriteria['bobot'];
                                         $matriksTernormalisasiY[$data['cu_alternatif']]['cu_alternatif'] = $data['cu_alternatif'];
                                         echo $hasilTernormalisasiR[$data['cu_alternatif']][$datakriteria['id_kriteria']] * $datakriteria['bobot'];
                                         ?>
-                                    </td>
-                                <?php } ?>
-                            </tr>
+                            </td>
+                            <?php } ?>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -355,10 +356,10 @@ $hasilSPK = array();
                         foreach ($matriksTernormalisasiY as $nilaiAlternatif) {
                             $tempHasil = 0;
                             $hasil = array() ?>
-                            <tr>
-                                <td>
-                                    S (<?= $nilaiAlternatif['cu_alternatif'] ?>) =
-                                        <?php
+                        <tr>
+                            <td>
+                                S (<?= $nilaiAlternatif['cu_alternatif'] ?>) =
+                                <?php
                                         $nomorSum = 1;
                                         foreach ($kriteria as $datakriteria) {
                                             echo $nilaiAlternatif[$datakriteria['id_kriteria']];
@@ -372,12 +373,12 @@ $hasilSPK = array();
                                             //echo $tempBobot . ";";
                                             $tempHasil += $nilaiAlternatif[$datakriteria['id_kriteria']];
                                         ?>
-                                        <?php }
+                                <?php }
                                         $nilaiS[$nilaiAlternatif['cu_alternatif']] = $tempHasil;
                                         echo " = " . $tempHasil;
                                         ?>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -403,10 +404,10 @@ $hasilSPK = array();
                         foreach ($matriksTernormalisasiY as $nilaiAlternatif) {
                             $tempHasil = 0;
                             $hasil = array() ?>
-                            <tr>
-                                <td>
-                                    R (<?= $nilaiAlternatif['cu_alternatif'] ?>) = MAX
-                                        <?php
+                        <tr>
+                            <td>
+                                R (<?= $nilaiAlternatif['cu_alternatif'] ?>) = MAX
+                                <?php
                                         $nomorSum = 1;
                                         foreach ($kriteria as $datakriteria) {
                                             echo "{ ";    
@@ -419,12 +420,12 @@ $hasilSPK = array();
                                                 $tempHasil = $nilaiAlternatif[$datakriteria['id_kriteria']];
                                             } 
                                         ?>
-                                        <?php } 
+                                <?php } 
                                         $nilaiR[$nilaiAlternatif['cu_alternatif']] = $tempHasil;
                                         echo " = " . $tempHasil; 
                                         ?>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -454,7 +455,7 @@ $hasilSPK = array();
                             <th>No. </th>
                             <th class="text-center">NUPTK</th>
                             <?php foreach ($kriteria as $datakriteria) { ?>
-                                <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
+                            <th>[<?php echo $datakriteria['id_kriteria'] . " " . $datakriteria['nama_kriteria'] ?>]</th>
                             <?php } ?>
                             <th>S<sub>i</sub></th>
                             <th>R<sub>i</sub></th>
@@ -471,22 +472,22 @@ $hasilSPK = array();
                         $minS = 0;
                         foreach ($matriksTernormalisasiY as $data) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['cu_alternatif']; ?></td>
-                                <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data['cu_alternatif']; ?></td>
+                            <?php
                                 foreach ($kriteria as $datakriteria) {
                                 ?>
-                                    <td class="text-center">
-                                        <?php
+                            <td class="text-center">
+                                <?php
                                         echo $data[$datakriteria['id_kriteria']];
                                         ?>
-                                    </td>
-                                <?php }
+                            </td>
+                            <?php }
                                 echo "<td>" . $nilaiS[$data['cu_alternatif']] . "</td>";
                                 echo "<td>" . $nilaiR[$data['cu_alternatif']] . "</td>";
                                 ?>
-                            </tr>
+                        </tr>
                         <?php } ?>
                         <tr>
                             <td colspan="<?= count($kriteria) + 2 ?>" align="center"><b>MAX</b></td>
@@ -525,7 +526,7 @@ $hasilSPK = array();
                 <div class="row">
                     <div class="col">
                         <h4 class="h5 align-middle m-0 font-weight-bold text-white">
-                           Nilai Max dan Min Vikor
+                            Nilai Max dan Min Vikor
                         </h4>
                     </div>
                 </div>
@@ -533,46 +534,46 @@ $hasilSPK = array();
             <div class="table-responsive">
                 <table class="table table-striped w-100 dt-responsive nowrap" id="dataTable">
                     <tbody>
-                            <tr align="center">
-                                <td>
-                                    S<b><sup> +</sup></b> =
-                                    <?php
+                        <tr align="center">
+                            <td>
+                                S<b><sup> +</sup></b> =
+                                <?php
                                     rsort($nilaiS);
                                     $maxS = $nilaiS[0];
                                     echo $nilaiS[0];
                                     ?>
-                                </td>
-                                <td>
-                                    S<b><sup> -</sup></b> =
-                                    <?php
+                            </td>
+                            <td>
+                                S<b><sup> -</sup></b> =
+                                <?php
                                     sort($nilaiS);
                                     $minS = $nilaiS[0];
                                     echo $nilaiS[0];
                                     ?>
-                                </td>
-                                <td>
-                                    R<b><sup> +</sup></b> =
-                                    <?php
+                            </td>
+                            <td>
+                                R<b><sup> +</sup></b> =
+                                <?php
                                     rsort($nilaiR);
                                     $maxR = $nilaiR[0];
                                     echo $nilaiR[0];
                                     ?>
-                                </td>
-                                <td>
-                                    R<b><sup> -</sup></b> =
-                                    <?php
+                            </td>
+                            <td>
+                                R<b><sup> -</sup></b> =
+                                <?php
                                     sort($nilaiR);
                                     $minR = $nilaiR[0];
                                     echo $nilaiR[0];
                                     ?>
-                                </td>
-                                
-                                <td>
-                                    V = (0.5)
-                                </td>
-                            </tr>
+                            </td>
+
+                            <td>
+                                V = (0.5)
+                            </td>
+                        </tr>
                     </tbody>
-                </table> 
+                </table>
             </div>
         </div>
     </div>
@@ -610,12 +611,12 @@ $hasilSPK = array();
                         $this->db->empty_table('hasilspk');
                         foreach ($matriks_keputusan as $matrikskeputusan) {
                         ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $matrikskeputusan['cu_alternatif']; ?></td>
-                                <td><?= $matrikskeputusan['nama']; ?></td>
-                                <td>
-                                    <?php
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $matrikskeputusan['cu_alternatif']; ?></td>
+                            <td><?= $matrikskeputusan['nama']; ?></td>
+                            <td>
+                                <?php
                                     echo "= ((" . $hasilS[$matrikskeputusan['cu_alternatif']] . " - " . $maxS . ") / (" . $minS . "-" . $maxS . ")0.5) + ((1-0.5)(" . $hasilR[$matrikskeputusan['cu_alternatif']] . " - ".$maxR.") / (".$minR."-".$maxR."))";
                                     echo "<br>";
                                     $hasil1 =round((0.5*(($hasilS[$matrikskeputusan['cu_alternatif']]-$maxS)/($minS-$maxS))),2);
@@ -626,9 +627,9 @@ $hasilSPK = array();
                                     echo "<br>";
                                     $hasilAkhir = $hasil1+$hasil2;
                                     ?>
-                                </td>
-                                <td>
-                                    <?php
+                            </td>
+                            <td>
+                                <?php
                                     echo $hasilAkhir;
                                     $hasilSPK[$matrikskeputusan['cu_alternatif']]['cu_alternatif'] = $matrikskeputusan['cu_alternatif'];
                                     $hasilSPK[$matrikskeputusan['cu_alternatif']]['nama'] = $matrikskeputusan['nama'];
@@ -645,8 +646,8 @@ $hasilSPK = array();
                                     //$sql = "INSERT INTO hasilspk values('" . $matrikskeputusan['nik'] . "','" . $matrikskeputusan['nama'] . "'," . $$hasilAkhir .")";
                                     //$insert = $this->db->query($sql);
                                     ?>
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>

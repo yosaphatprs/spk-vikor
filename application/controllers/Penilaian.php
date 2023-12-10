@@ -43,7 +43,6 @@ class Penilaian extends CI_Controller
             $data['siswa'] = $this->db->get('siswa')->result_array();
             $this->db->order_by('id_kriteria', 'ASC');
             $data['kriteria'] = $this->db->get('kriteria')->result_array();
-            $data['subkriteria'] = $this->db->get('subkriteria')->result_array();
             $this->template->load('templates/dashboard', 'penilaian/add', $data);
         } else {
             $input = $this->input->post(null, true);
@@ -76,7 +75,6 @@ class Penilaian extends CI_Controller
             $data['maxkriteria'] = $this->db->count_all('kriteria');
             $this->db->order_by('id_kriteria', 'ASC');
             $data['kriteria'] = $this->db->get('kriteria')->result_array();
-            $data['subkriteria'] = $this->db->get('subkriteria')->result_array();
             $this->template->load('templates/dashboard', 'penilaian/edit', $data);
         } else {
             $input = $this->input->post(null, true);

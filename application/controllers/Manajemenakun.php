@@ -36,7 +36,7 @@ class Manajemenakun extends CI_Controller
         } else {
             $input = $this->input->post(null, true);
             $password = password_hash($input['password'],PASSWORD_DEFAULT);
-            $sql = "INSERT INTO user values('','". $input['nama'] . "','". $input['username'] . "','". $input['role'] . "','". $password . "','". $image . "')";
+            $sql = "INSERT INTO user values('','". $input['nama'] . "','". $input['username'] . "','". $input['role'] . "','". $password . "')'";
             $insert = $this->db->query($sql);
             if ($insert) {
                 set_pesan('data berhasil disimpan.');

@@ -16,8 +16,13 @@ class Datakriteria extends CI_Controller
     public function index()
     {
         $data['title'] = "";
-        $this->db->order_by('id_kriteria', 'ASC');
-        $data['kriteria'] = $this->db->get('kriteria')->result_array();
+        // $this->db->order_by('id_kriteria', 'ASC');
+        // $data['kriteria'] = $this->db->get('kriteria')->result_array();
+        $this->db->select('*');
+        $this->db->from('kriteria');
+        $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+        $query = $this->db->get();
+        $data['kriteria'] = $query->result_array();
         $this->template->load('templates/dashboard', 'kriteria/data', $data);
     }
 
@@ -34,9 +39,11 @@ class Datakriteria extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = "Tambah Data Kriteria";
             $kode = 'K';
-            $kode_terakhir = $this->admin->getMax('kriteria', 'id_kriteria', $kode);
-            $kode_tambah = substr($kode_terakhir, -1, 1);
-            $kode_tambah++;
+            $query = $this->db->query("SELECT MAX(CAST(TRIM(LEADING 'K' FROM id_kriteria) AS UNSIGNED)) AS max_id FROM kriteria");
+            $row = $query->row();
+            $kode_terakhir = $row->max_id;
+            // $kode_terakhir = $this->admin->getMax('kriteria', 'id_kriteria', $kode);
+            $kode_tambah = $kode_terakhir + 1;
             $number = str_pad($kode_tambah, 5, '0', STR_PAD_LEFT);
             $data['kode'] = $kode . $kode_tambah;
             
@@ -68,7 +75,8 @@ class Datakriteria extends CI_Controller
             $input = $this->input->post(null, true);
             $data = array(
                 'nama_kriteria' => $input['nama_kriteria'],
-                'bobot' => $input['bobot']
+                'bobot' => $input['bobot'],
+                'tipe' => $input['tipe']
             );
             $update = $this->admin->update('kriteria', 'id_kriteria', $input['id_kriteria'], $data);
             if ($update) {
