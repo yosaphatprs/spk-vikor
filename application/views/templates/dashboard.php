@@ -38,9 +38,9 @@
         <ul class="navbar-nav bg-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex text-light align-items-center bg-danger mary justify-content-center">
-                <div class="sidebar-brand-icon"><img src="<?= base_url() ?>assets/img/logopahnas.jpg ?>" class="rounded-circle" style="width:65px;" alt=""></div>
-                <div class="sidebar-brand-text mx-3 small text-start"><b>SMP PAHLAWAN NASIONAL</b></div>
+            <a class="sidebar-brand d-flex text-light align-items-center bg-info mary justify-content-center">
+                <div class="sidebar-brand-icon"><img src="<?= base_url() ?>assets/img/logo_polinema.png ?>" class="rounded-circle" style="width:65px;" alt=""></div>
+                <div class="sidebar-brand-text mx-3 small text-start"><b>Politeknik Negeri Malang</b></div>
             </a>
 
             <!-- Nav Item - Dashboard -->

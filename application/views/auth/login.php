@@ -8,7 +8,7 @@
                     <div class="col-lg-6 d-none d-lg-block">
                         <div class="p-3">
                             <div class="text-center mb-4">
-                                <h3>Sekolah Menengah Pertama Pahlawan Nasional</h3><br>
+                                <h3>Politeknik Negeri Malang</h3><br>
                                 <strong class="text-dark">Silahkan Login</strong>
                             </div>
                             <?= $this->session->flashdata('pesan'); ?>
