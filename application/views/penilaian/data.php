@@ -54,11 +54,10 @@
                     <td><?= $dataalternatif['nama']; ?></td>
                     <?php
                         foreach ($kriteria as $datakriteria) {
-                            $this->db->order_by('kd_kriteria', 'ASC');
+                            $this->db->order_by('CAST(kd_kriteria AS UNSIGNED)', 'ASC');
                             $this->db->where('cu_alternatif', $dataalternatif['cu_alternatif']);
                             $this->db->where('kd_kriteria', $datakriteria['id_kriteria']);
                             $penilaian = $this->db->get('penilaian');
-
                             if ($penilaian->num_rows() > 0) {
                         ?>
                     <td class="text-center">

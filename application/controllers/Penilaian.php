@@ -27,6 +27,13 @@ class Penilaian extends CI_Controller
         // $data['kriteria'] = $this->db->get('kriteria')->result_array();
         $this->db->order_by('cu_alternatif', 'ASC');
         $data['alternatif'] = $this->db->get('alternatif')->result_array();
+        // $this->db->select('*');
+        // $this->db->from('kriteria');
+        // $this->db->join('penilaian', 'penilaian.kd_kriteria = kriteria.id_kriteria');
+        // $this->db->join('alternatif', 'alternatif.cu_alternatif = penilaian.cu_alternatif');
+        // $this->db->order_by('alternatif.cu_alternatif', 'ASC');
+        // $this->db->order_by('CAST(id_kriteria AS UNSIGNED)', 'ASC');
+        // $data['penilaian'] = $this->db->get()->result_array();
         $this->template->load('templates/dashboard', 'penilaian/data', $data);
         
     }
@@ -79,7 +86,7 @@ class Penilaian extends CI_Controller
             $data['id'] = $getId;
             $data['alternatif'] = $this->db->query("SELECT * FROM alternatif WHERE cu_alternatif='" . $getId . "'")->result_array();
             $this->db->order_by('id_kriteria', 'ASC');
-            $data['penilaian'] = $this->db->query("SELECT * FROM penilaian WHERE cu_alternatif='" . $getId . "' ORDER BY kd_kriteria ASC")->result_array();
+            $data['penilaian'] = $this->db->query("SELECT * FROM penilaian WHERE cu_alternatif='" . $getId . "' ORDER BY CAST(kd_kriteria AS UNSIGNED) ASC")->result_array();
             $data['maxkriteria'] = $this->db->count_all('kriteria');
             $this->db->select('*');
             $this->db->from('kriteria');
